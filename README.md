@@ -43,7 +43,7 @@
 ## Getting Started (Quick Setup)
 
 ```bash
-git clone https://github.com/your-username/meditrack.git
+git clone https://github.com/piyush200516/meditrack.git
 cd meditrack
 
 # Frontend
