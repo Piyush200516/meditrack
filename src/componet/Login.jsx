@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
+import { useAuth } from "../context/AuthContext.jsx";
 
 import loginImg from "../image/login.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +23,11 @@ const Login = () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
+      if (email === 'admin@hospital.com' && password === 'admin123') {
+        login(email, 'admin');
+      } else {
+        login(email, 'patient');
+      }
       navigate('/dashboard');
     } catch (error) {
       alert('Login failed');

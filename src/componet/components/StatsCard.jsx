@@ -1,7 +1,8 @@
 import React from 'react';
 import { FaUserMd, FaHeartbeat, FaUserNurse, FaClipboardList } from 'react-icons/fa';
 
-const StatsCard = ({ title, value, change, color = 'primary', icon }) => {
+const StatsCard = ({ title, value, change, color = 'primary', icon, sparkData }) => {
+
   const IconComponent = icon || FaUserMd; // Default icons
   const getColorClasses = (type) => {
     const base = 'text-white shadow-lg';
@@ -28,6 +29,12 @@ const StatsCard = ({ title, value, change, color = 'primary', icon }) => {
           +{change}%
         </span>
       </div>
+      {sparkData && (
+        <svg viewBox="0 0 100 20" className="w-full h-10 mb-4">
+          <path d={sparkData.path} fill="none" stroke={`url(#spark-${color})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sparkline" />
+        </svg>
+      )}
+
       <p className="text-gray-600 text-sm font-medium uppercase tracking-wide">{title}</p>
       <h3 className="text-3xl font-black text-gray-900 mt-1 drop-shadow-md group-hover:text-primary-600 transition-colors">
         {value}

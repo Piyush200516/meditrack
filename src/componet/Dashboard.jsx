@@ -2,53 +2,83 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import StatsCard from './components/StatsCard';
 import ServiceCard from './components/ServiceCard';
-import { FaSearch, FaBell, FaChartPie, FaStethoscope, FaHeart, FaUserNurse, FaClipboardList, FaAmbulance, FaHospital } from 'react-icons/fa';
+import MedicineQuickAdd from './components/MedicineQuickAdd';
+import HealthChart from './components/HealthChart';
+import { useMedicines } from '../context/MedicineContext';
+
+import { FaSearch, FaBell, FaChartPie, FaStethoscope, FaHeart, FaUserNurse, FaClipboardList, FaAmbulance, FaHospital, FaMoon, FaSun, FaUserCircle, FaPills, FaSyringe, FaTabletAlt } from 'react-icons/fa';
 import './dashboard.css';
 
-const services = [
-  { name: '24x7 First Aid', description: 'Emergency response within minutes', icon: FaAmbulance },
-  { name: 'Doctor Support', description: 'On-call specialist consultations', icon: FaStethoscope },
-{ name: 'Elderly Care', description: 'Dedicated care for seniors', icon: FaUserNurse },
-  { name: 'Home Nursing', description: 'Professional nursing at home', icon: FaHospital },
+const mockHealthData = [
+  { date: 'Mon', bp: 120 },
+  { date: 'Tue', bp: 118 },
+  { date: 'Wed', bp: 122 },
+  { date: 'Thu', bp: 119 },
+  { date: 'Fri', bp: 121 },
+  { date: 'Sat', bp: 117 },
 ];
 
-const stats = [
-  { title: 'Upcoming Appointments', value: '02', change: 12, color: 'primary', icon: FaClipboardList },
-  { title: 'Active Care Plans', value: '05', change: 8, color: 'secondary', icon: FaHeart },
-  { title: 'Doctors Available', value: '12', change: 3, color: 'success' },
-  { title: 'Total Nurses', value: '08', change: -2, color: 'danger' },
-];
+const mockSparkData = {
+  primary: 'M10 10 L25 12 L40 8 L55 14 L70 11 L85 15 L95 13',
+  secondary: 'M10 12 L25 14 L40 10 L55 13 L70 11 L85 12 L95 14',
+};
 
 const appointments = [
   { title: 'Home Visit', time: 'Today, 11:00 AM', status: 'Confirmed', color: 'success' },
   { title: 'Follow-Up Checkup', time: 'Tomorrow, 10:30 AM', status: 'Scheduled', color: 'secondary' },
 ];
 
-const healthStats = [
-  { label: 'Blood Pressure', value: '120/80 mmHg', color: 'success' },
-  { label: 'Blood Sugar', value: '110 mg/dL', color: 'warning' },
-  { label: 'Heart Rate', value: '76 bpm', color: 'primary' },
-  { label: 'Weight', value: '68 kg', color: 'secondary' },
-];
-
-const alerts = [
-  '⚠️ Medication Reminder: 8:00 PM',
-  '📍 Vital Check Alert: Check BP',
-  '📝 Care Plan Update: Review details',
-];
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('dashboard');
   const [search, setSearch] = useState('');
   const [notifications, setNotifications] = useState(3);
+  const [isDark, setIsDark] = useState(false);
+  const { medicines } = useMedicines();
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
+  const toggleDarkMode = () => {
+    const newDark = !isDark;
+    setIsDark(newDark);
+    if (newDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', newDark.toString());
+  };
+
   useEffect(() => {
-    // Mock active nav based on path
+    const savedDark = localStorage.getItem('darkMode') === 'true';
+    setIsDark(savedDark);
+    if (savedDark) {
+      document.documentElement.classList.add('dark');
+    }
     setActiveNav(window.location.pathname.includes('dashboard') ? 'dashboard' : activeNav);
   }, []);
+
+  const stats = [
+    { title: 'Upcoming Appointments', value: '02', change: 12, color: 'primary', icon: FaClipboardList, sparkData: mockSparkData.primary },
+    { title: 'Active Medicines', value: medicines.filter(m => m.isActive).length.toString(), change: 8, color: 'success', icon: FaPills, sparkData: mockSparkData.secondary },
+    { title: 'Doctors Available', value: '12', change: 3, color: 'secondary', icon: FaStethoscope },
+    { title: 'Reminders Today', value: '03', change: -2, color: 'warning', icon: FaTabletAlt },
+  ];
+
+  const services = [
+    { name: 'Medicine Tracker', description: 'Track your daily medications', icon: FaPills },
+    { name: 'Refill Reminders', description: 'Never miss a refill', icon: FaSyringe },
+    { name: 'Doctor Consults', description: 'Quick video consultations', icon: FaStethoscope },
+    { name: 'Health Reports', description: 'Generate detailed reports', icon: FaChartPie },
+  ];
+
+  const dynamicAlerts = [
+    '⚠️ Take Paracetamol now',
+    '📍 Check BP - High reading',
+    `📝 ${medicines[0]?.name || 'Medicine'} dose due`,
+  ];
+
 
   return (
     <div className="dashboard-wrapper custom-scrollbar min-h-screen">
@@ -60,7 +90,7 @@ function Dashboard() {
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-4">
               <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent drop-shadow-lg">
-                Welcome Back, Rajesh!
+                Welcome Back!
               </h1>
             </div>
             <div className="flex items-center gap-4">
@@ -68,7 +98,7 @@ function Dashboard() {
                 <FaSearch className="text-gray-500" />
                 <input
                   type="text"
-                  placeholder="Search services, appointments..."
+                  placeholder="Search medicines, appointments..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className="absolute inset-0 p-3 -m-3 bg-transparent outline-none text-gray-900 placeholder-gray-500"
@@ -82,11 +112,25 @@ function Dashboard() {
                   </span>
                 )}
               </button>
-              <img 
-                src="https://i.pravatar.cc/40?img=1" 
-                alt="user" 
-                className="w-12 h-12 rounded-2xl ring-2 ring-primary/30 hover:ring-primary/50 transition-all cursor-pointer shadow-lg hover:shadow-xl" 
-              />
+              <button 
+                onClick={toggleDarkMode}
+                className="p-3 glass rounded-2xl shadow-lg hover:scale-105 transition-all"
+                title="Toggle Dark Mode"
+              >
+                {isDark ? <FaSun className="text-xl text-yellow-400" /> : <FaMoon className="text-xl text-gray-700" /> }
+              </button>
+              <div className="relative group">
+                <img 
+                  src="https://i.pravatar.cc/40?img=1" 
+                  alt="Profile" 
+                  className="w-12 h-12 rounded-2xl ring-2 ring-primary/30 hover:ring-primary/50 transition-all cursor-pointer shadow-lg hover:shadow-xl" 
+                />
+                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-2xl py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border">
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Profile</a>
+                  <a href="#" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Settings</a>
+                  <a href="/#" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 border-t">Logout</a>
+                </div>
+              </div>
             </div>
           </div>
         </header>
@@ -99,15 +143,20 @@ function Dashboard() {
             ))}
           </div>
 
-          {/* Services */}
-          <section className="space-y-6">
-            <h2 className="text-3xl font-black text-gray-900 animate-fade-in-up">Our Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {services.map((service, idx) => (
-                <ServiceCard key={service.name} {...service} />
-              ))}
+          {/* Quick Add & Services */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <MedicineQuickAdd />
+            <div className="lg:col-span-3">
+              <section className="space-y-6">
+                <h2 className="text-3xl font-black text-gray-900 dark:text-white animate-fade-in-up">Quick Actions</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {services.map((service, idx) => (
+                    <ServiceCard key={service.name} {...service} />
+                  ))}
+                </div>
+              </section>
             </div>
-          </section>
+          </div>
 
           {/* Bottom Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-slide-in-right">
@@ -115,14 +164,14 @@ function Dashboard() {
             <div className="glass shadow-2xl rounded-3xl p-8 lg:row-span-2">
               <div className="flex items-center gap-3 mb-6">
                 <FaClipboardList className="text-2xl text-primary-500" />
-                <h3 className="text-2xl font-black text-gray-900">My Appointments</h3>
+                <h3 className="text-2xl font-black text-gray-900 dark:text-white">My Appointments</h3>
               </div>
               <div className="space-y-4">
                 {appointments.map((appt, idx) => (
-                  <div key={idx} className="group flex items-center justify-between p-4 glass rounded-2xl hover:bg-white/50 transition-all cursor-pointer shadow-inner hover:shadow-glass">
+                  <div key={idx} className="group flex items-center justify-between p-4 glass rounded-2xl hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all cursor-pointer shadow-inner hover:shadow-glass">
                     <div>
-                      <p className="font-bold text-lg text-gray-900">{appt.title}</p>
-                      <p className="text-gray-600">{appt.time}</p>
+                      <p className="font-bold text-lg text-gray-900 dark:text-white">{appt.title}</p>
+                      <p className="text-gray-600 dark:text-gray-400">{appt.time}</p>
                     </div>
                     <span className={`px-4 py-2 rounded-full font-semibold text-sm ${appt.color === 'success' ? 'bg-success/10 text-success ring-1 ring-success/30' : 'bg-secondary/10 text-secondary ring-1 ring-secondary/30'}`}>
                       {appt.status}
@@ -132,33 +181,26 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Health Stats */}
+            {/* Health Trends */}
             <div className="glass shadow-2xl rounded-3xl p-8">
               <div className="flex items-center gap-3 mb-6">
                 <FaChartPie className="text-2xl text-primary-500" />
-                <h3 className="text-2xl font-black text-gray-900">Health Stats</h3>
+                <h3 className="text-2xl font-black text-gray-900 dark:text-white">Health Trends</h3>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {healthStats.map((stat, idx) => (
-                  <div key={idx} className="text-center p-4 rounded-xl bg-white/50 hover:bg-white shadow-sm hover:shadow-md transition-all">
-                    <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
-                    <p className="text-2xl font-black text-gray-900 mt-1">{stat.value}</p>
-                  </div>
-                ))}
-              </div>
+              <HealthChart data={mockHealthData} dataKey="bp" />
             </div>
 
             {/* Care Alerts */}
             <div className="glass shadow-2xl rounded-3xl p-8">
               <div className="flex items-center gap-3 mb-6">
                 <FaBell className="text-2xl text-warning-500" />
-                <h3 className="text-2xl font-black text-gray-900">Care Alerts</h3>
+                <h3 className="text-2xl font-black text-gray-900 dark:text-white">Care Alerts</h3>
               </div>
               <ul className="space-y-3">
-                {alerts.map((alert, idx) => (
-                  <li key={idx} className="flex items-start gap-3 p-3 bg-warning/10 rounded-xl border-l-4 border-warning/50 hover:bg-warning/20 transition-all cursor-pointer group">
+                {dynamicAlerts.map((alert, idx) => (
+                  <li key={idx} className="flex items-start gap-3 p-3 bg-warning/10 rounded-xl border-l-4 border-warning/50 hover:bg-warning/20 dark:hover:bg-warning/30 transition-all cursor-pointer group">
                     <span className="text-lg mt-0.5">⚠️</span>
-                    <span className="font-medium text-gray-800 group-hover:text-warning-700">{alert}</span>
+                    <span className="font-medium text-gray-800 dark:text-gray-200 group-hover:text-warning-700">{alert}</span>
                   </li>
                 ))}
               </ul>

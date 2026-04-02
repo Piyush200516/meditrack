@@ -1,10 +1,13 @@
 import React from 'react';
-import { FaTachometerAlt, FaCalendarAlt, FaCog, FaHeadset, FaBars, FaTimes } from 'react-icons/fa';
+import { FaTachometerAlt, FaCalendarAlt, FaClipboardList, FaCog, FaHeadset, FaBars, FaTimes } from 'react-icons/fa';
+
 
 const Sidebar = ({ isOpen, onToggle, active }) => {
   const navItems = [
     { icon: FaTachometerAlt, label: 'Dashboard', href: '/dashboard' },
     { icon: FaCalendarAlt, label: 'Appointments', href: '/appointments' },
+    { icon: FaClipboardList, label: 'Medicines', href: '/medicines' },
+
     { icon: FaCog, label: 'Services', href: '/services' },
     { icon: FaHeadset, label: 'Support', href: '/support' },
   ];
