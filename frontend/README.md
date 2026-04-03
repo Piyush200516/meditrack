@@ -1,16 +1,127 @@
-# React + Vite
+# 🎨 MediTrack Frontend – React + Tailwind UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Overview
 
-Currently, two official plugins are available:
+This is the **frontend** of the MediTrack healthcare platform, inspired by modern digital healthcare apps.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+It provides a clean and responsive UI for users to:
 
-## React Compiler
+* Browse healthcare services
+* Login/Register
+* View doctors
+* Book appointments
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* ⚛️ React.js (Vite)
+* 🎨 Tailwind CSS (v4)
+* 🔀 React Router DOM
+* 📦 Axios (for API calls - future)
+
+---
+
+## 📁 Project Structure
+
+```id="5l7r2p"
+frontend/
+ ├── src/
+ │    ├── components/     # Reusable UI components (Navbar, Footer)
+ │    ├── pages/          # Pages (Login, Doctors, etc.)
+ │    ├── Home/           # Home page UI
+ │    │    └── home.jsx
+ │    ├── App.jsx         # Routing setup
+ │    ├── main.jsx        # Entry point
+ │    └── index.css       # Tailwind import
+ │
+ ├── index.html
+ └── package.json
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 🔹 1. Navigate to frontend
+
+```id="7w5p3k"
+cd frontend
+```
+
+### 🔹 2. Install dependencies
+
+```id="n1j9ke"
+npm install
+```
+
+### 🔹 3. Run development server
+
+```id="z4n2qp"
+npm run dev
+```
+
+---
+
+## 🌐 Routes
+
+| Route    | Description |
+| -------- | ----------- |
+| `/`      | Home Page   |
+| `/login` | Login Page  |
+
+---
+
+## 🎯 Features
+
+* ✅ Modern UI (MediBuddy-inspired)
+* ✅ Responsive design (mobile-friendly)
+* ✅ Clean component structure
+* ✅ Routing setup using React Router
+* ⏳ API integration (coming soon)
+
+---
+
+## 🎨 UI Sections
+
+* Navbar
+* Services (Doctor, Medicine, Lab Test)
+* Consultation Banner
+* Healthcare Cards
+* Call-to-action buttons
+
+---
+
+## ⚠️ Current Status
+
+* ✅ UI Completed (Basic)
+* ❌ Backend Not Connected
+* ❌ Authentication Not Implemented
+
+---
+
+## 🔥 Future Improvements
+
+* 🔐 Login & Signup with validation
+* 🔗 API integration with backend
+* 📅 Appointment booking system
+* 👨‍⚕️ Dynamic doctor listing
+* 🌙 Dark mode support
+* 🎞️ Animations (GSAP)
+
+---
+
+## 🧠 Best Practices Used
+
+* Component-based architecture
+* Clean folder structure
+* Reusable UI components
+* Tailwind utility-first styling
+
+---
+
+## 👨‍💻 Author
+
+**Piyush Mishra**
+
+---
