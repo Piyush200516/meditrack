@@ -170,7 +170,7 @@ const Home = () => {
           </div>
         </div>
         <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 MediTrack. All rights reserved. | Designed for healthcare excellence.</p>
+          <p>&copy; 2026 MediTrack. All rights reserved. | Designed for healthcare excellence.</p>
         </div>
       </footer>
 
