@@ -1,12 +1,14 @@
-# MediTrack White Screen Fix - Approved Plan Steps
+# MediTrack Home.jsx UI Update Progress
 
-## Current Status: Swiper removed, ready to test
-- [x] User approved plan
-- [x] Step 1-3: Core updates
-- [x] Step 4: Diagnosed Swiper v11/React conflict
-- [x] Step 5: Commented Swiper imports, static hero section in home.jsx
-- [x] Step 6: Clean reinstall deps attempted
-- [ ] Step 7: cd frontend && npm run dev (now should work without Swiper error)
-- [ ] Step 8: Confirm console shows "Home component rendering", page loads
-- [ ] Step 9: Later re-add compatible Swiper (^10.4.4 recommended)
+## TODO Steps:
+- [x] 1. Create TODO.md with plan breakdown
+- [x] 2. Implement mobile-responsive navbar with hamburger menu
+- [x] 3. Update hero section with background image and search bar
+- [x] 4. Enhance services section with links and animations
+- [ ] 5. Add stats section
+- [ ] 6. Add "Why Choose Us" features section
+- [ ] 7. Add testimonials section
+- [ ] 8. Improve footer with social links
+- [ ] 9. Test responsiveness and run dev server
+- [ ] 10. Complete task
 
