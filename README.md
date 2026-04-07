@@ -8,6 +8,12 @@ The platform is designed to simulate real-world healthcare workflows with a focu
 
 ---
 
+## 🏥 MediTeach System Architecture
+
+<img width="1024" height="1536" alt="ChatGPT Image Apr 7, 2026, 10_39_17 PM" src="https://github.com/user-attachments/assets/a03132b8-e27f-44c4-9460-1036a1d29581" />
+
+---
+
 ## 👥 User Roles
 
 ### 👤 Patient (User)
