@@ -8,6 +8,14 @@ const Card = ({ title, desc }) => (
   </div>
 );
 
+const ImageServiceCard = ({ img, title, desc }) => (
+  <div className="bg-white/70 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-blue-100 hover:scale-105 transition cursor-pointer">
+    <img src={img} alt={title} className="w-20 h-20 mx-auto mb-4 rounded-xl object-cover shadow-md" />
+    <h3 className="font-semibold text-xl text-blue-800 mb-2">{title}</h3>
+    <p className="text-sm text-gray-600">{desc}</p>
+  </div>
+);
+
 const Home = () => {
   return (
     <div className="bg-gradient-to-b from-blue-100 via-blue-200 to-blue-100 min-h-screen">
@@ -52,6 +60,34 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+
+      {/* Medical Services Cards */}
+<div className="mt-16 px-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <ImageServiceCard
+      img="/images/doctor-video.png"
+      title="Instant Video Consultation"
+      desc="Connect within 60 secs"
+    />
+    <ImageServiceCard
+      img="/images/doctor-find.png"
+      title="Find Doctors Near You"
+      desc="Confirmed appointments"
+    />
+    <ImageServiceCard
+      img="/images/lab-test.png"
+      title="Lab Tests"
+      desc="Safe and trusted lab tests"
+    />
+    <ImageServiceCard
+      img="/images/surgery.png"
+      title="Surgeries"
+      desc="Safe and trusted surgery centers"
+    />
+  </div>
+</div>
+
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
