@@ -10,7 +10,8 @@ The platform is designed to simulate real-world healthcare workflows with a focu
 
 ## 🏥 MediTeach System Architecture
 
-<img width="1024" height="1536" alt="ChatGPT Image Apr 7, 2026, 10_39_17 PM" src="https://github.com/user-attachments/assets/a03132b8-e27f-44c4-9460-1036a1d29581" />
+<img width="1024" height="1536" alt="System Architecture Apr 7, 2026, 10_39_17 PM" src="![WhatsApp Image 2026-04-08 at 8 17 39 AM](https://github.com/user-attachments/assets/e835ca25-0e57-40c6-ae39-9bbf7405096e)
+" />
 
 ---
 
