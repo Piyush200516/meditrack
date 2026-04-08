@@ -1,25 +1,10 @@
-import {
-  FaUserMd,
-  FaHospital,
-  FaUser,
-  FaCogs,
-  FaRobot,
-  FaDatabase,
-} from "react-icons/fa";
+import { FaSearch, FaRobot, FaVideo, FaBell, FaMapMarkerAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Card = ({ title, desc }) => (
-  <div className="bg-white/70 backdrop-blur-lg p-5 rounded-2xl shadow-lg border border-blue-100 text-center hover:scale-105 transition">
-    <h3 className="font-semibold text-blue-800 text-lg">{title}</h3>
+  <div className="bg-white/70 backdrop-blur-lg p-4 rounded-2xl shadow-md border border-blue-100 text-center hover:scale-105 transition">
+    <h3 className="font-semibold text-blue-800">{title}</h3>
     <p className="text-sm text-gray-600">{desc}</p>
-  </div>
-);
-
-const Section = ({ title, children }) => (
-  <div className="mt-16 px-6">
-    <h2 className="text-2xl font-bold text-center text-blue-900 mb-8">
-      {title}
-    </h2>
-    {children}
   </div>
 );
 
@@ -32,110 +17,132 @@ const Home = () => {
         <h1 className="text-2xl font-bold text-blue-700">MediTech</h1>
         <div className="space-x-6 text-blue-800 font-medium hidden md:block">
           <a href="#">Home</a>
-          <a href="#">Features</a>
-          <a href="#">Architecture</a>
+          <a href="#">Services</a>
+          <a href="#">Doctors</a>
+          <a href="#">AI Health</a>
           <a href="#">Contact</a>
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-xl shadow">
-          Get Started
-        </button>
+        <Link to="/login">
+  <button className="bg-blue-600 text-white px-4 py-2 rounded-xl">
+    Login Now
+  </button>
+</Link>
       </div>
 
       {/* Hero */}
-      <div className="text-center py-20 px-4">
-        <h1 className="text-5xl font-bold text-blue-900 mb-4">
-          Advanced MediTech System
+      <div className="text-center py-16 px-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+          Advanced MediTech Healthcare System
         </h1>
         <p className="text-lg text-gray-700 mb-6">
-          All-in-One Healthcare Platform with AI & Microservices
+          AI + Microservices Powered Smart Healthcare
         </p>
-        <button className="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:scale-105 transition">
-          Explore System
+
+        {/* Search */}
+        <div className="flex justify-center">
+          <div className="flex bg-white rounded-full shadow-lg overflow-hidden w-full max-w-xl">
+            <input
+              type="text"
+              placeholder="Find doctors, search symptoms..."
+              className="flex-1 px-4 py-3 outline-none"
+            />
+            <button className="bg-blue-600 text-white px-6 flex items-center gap-2">
+              <FaSearch /> Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
+        <Card title="Book Appointment" desc="Easy doctor booking" />
+        <Card title="Online Consultation" desc="Talk with doctors" />
+        <Card title="Lab Tests" desc="Book medical tests" />
+      </div>
+
+      {/* Secure Platform */}
+      <div className="mt-16 px-6 text-center">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">
+          Secure & Fast Platform
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card title="Secure Login" desc="Protected user access" />
+          <Card title="Fast Response" desc="Quick system speed" />
+          <Card title="Reliable System" desc="Trusted services" />
+        </div>
+      </div>
+
+      {/* Services */}
+      <div className="mt-16 px-6 text-center">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">
+          Our Services
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Card title="Appointment Booking" desc="" />
+          <Card title="Hospital Management" desc="" />
+          <Card title="Pharmacy" desc="" />
+          <Card title="Payments" desc="" />
+        </div>
+      </div>
+
+      {/* AI Section */}
+      <div className="mt-16 px-6">
+        <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-8 shadow-lg flex flex-col md:flex-row items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-blue-900 mb-2">
+              AI Powered Healthcare
+            </h2>
+            <p className="text-gray-600 mb-4">
+              Hello, how can I help you today?
+            </p>
+            <button className="bg-blue-600 text-white px-5 py-2 rounded-xl flex items-center gap-2">
+              <FaRobot /> Ask AI Doctor
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Real-Time */}
+      <div className="mt-16 px-6 text-center">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">
+          Real-Time Features
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Card title="Live Chat" desc="" />
+          <Card title="Video Consultation" desc="" />
+          <Card title="Notifications" desc="" />
+          <Card title="24/7 Tracking" desc="" />
+        </div>
+      </div>
+
+      {/* Integrations */}
+      <div className="mt-16 px-6 text-center">
+        <h2 className="text-2xl font-bold text-blue-900 mb-6">
+          Trusted & Secure
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Card title="Payments" desc="" />
+          <Card title="Google Maps" desc="" />
+          <Card title="SMS / Email" desc="" />
+          <Card title="WhatsApp API" desc="" />
+        </div>
+      </div>
+
+      {/* Emergency */}
+      <div className="mt-16 px-6 text-center">
+        <h2 className="text-2xl font-bold text-red-600 mb-4">
+          Emergency Help
+        </h2>
+        <button className="bg-red-500 text-white px-6 py-3 rounded-xl shadow-lg">
+          Call Ambulance 🚨
         </button>
       </div>
 
-      {/* Roles */}
-      <Section title="User Interfaces">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <Card title="Patient App" desc="Book & manage appointments" />
-          <Card title="Doctor Dashboard" desc="Manage patients & reports" />
-          <Card title="Hospital Admin Panel" desc="Manage hospital system" />
-          <Card title="Super Admin Panel" desc="Full system control" />
-        </div>
-      </Section>
-
-      {/* API Gateway */}
-      <Section title="API Gateway">
-        <div className="bg-blue-600 text-white text-center p-6 rounded-2xl shadow-lg">
-          API • JWT Auth • Rate Limiting • Load Balancer
-        </div>
-      </Section>
-
-      {/* Microservices */}
-      <Section title="Microservices Layer">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <Card title="User Service" desc="Authentication & profiles" />
-          <Card title="Appointment Service" desc="Booking system" />
-          <Card title="Hospital Service" desc="Hospital management" />
-          <Card title="Pharmacy" desc="Medicine system" />
-          <Card title="Payment Service" desc="Transactions" />
-          <Card title="Insurance Service" desc="Claims & coverage" />
-          <Card title="LMS Service" desc="Learning platform" />
-        </div>
-      </Section>
-
-      {/* AI Engine */}
-      <Section title="AI Engine">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <Card title="AI Chatbot" desc="24/7 assistant" />
-          <Card title="Symptom Checker" desc="Analyze symptoms" />
-          <Card title="Report Analysis" desc="AI insights" />
-          <Card title="Disease Prediction" desc="Predict diseases" />
-        </div>
-      </Section>
-
-      {/* Real-Time */}
-      <Section title="Real-Time Communication">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <Card title="WebSocket" desc="Live communication" />
-          <Card title="Video Call" desc="Doctor consultation" />
-          <Card title="Chat System" desc="Instant messaging" />
-          <Card title="Notifications" desc="Alerts & updates" />
-        </div>
-      </Section>
-
-      {/* Data Layer */}
-      <Section title="Data Layer">
-        <div className="grid grid-cols-3 gap-6">
-          <Card title="MySQL" desc="Primary database" />
-          <Card title="MongoDB" desc="NoSQL storage" />
-          <Card title="Redis" desc="Caching system" />
-        </div>
-      </Section>
-
-      {/* Integrations */}
-      <Section title="External Integrations">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <Card title="Payments" desc="Razorpay / Stripe" />
-          <Card title="Google Maps" desc="Location services" />
-          <Card title="SMS / Email" desc="Notifications" />
-          <Card title="WhatsApp API" desc="Messaging" />
-        </div>
-      </Section>
-
-      {/* DevOps */}
-      <Section title="Cloud & DevOps">
-        <div className="flex flex-wrap justify-center gap-6">
-          <Card title="Docker" desc="Containerization" />
-          <Card title="Kubernetes" desc="Orchestration" />
-          <Card title="AWS / GCP" desc="Cloud hosting" />
-        </div>
-      </Section>
-
       {/* Footer */}
       <div className="mt-16 py-6 text-center text-gray-600">
-        © 2026 MediTech • All Rights Reserved
+        Docker • Kubernetes • AWS • GCP • Azure
       </div>
+
     </div>
   );
 };
