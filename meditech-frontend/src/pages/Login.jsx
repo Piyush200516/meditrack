@@ -1,4 +1,5 @@
 import { FaUserMd, FaLock, FaEnvelope } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -75,10 +76,11 @@ export default function Login() {
 
           {/* EXTRA */}
           <p className="text-sm text-gray-500 text-center mt-4">
-            Don’t have an account?{" "}
-            <span className="text-blue-600 cursor-pointer">Register</span>
-          </p>
-
+  Don’t have an account?{" "}
+  <Link to="/register" className="text-blue-600">
+    Register
+  </Link>
+</p>
         </div>
       </div>
     </div>
