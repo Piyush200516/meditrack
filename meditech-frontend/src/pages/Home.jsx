@@ -1,38 +1,23 @@
 import { useState, useContext } from 'react';
-import { FaSearch, FaRobot } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
+import { 
+  FaSearch, FaArrowRight, 
+  FaStethoscope, FaUserMd, FaHeartbeat, FaRunning,
+  FaShieldAlt, FaClock, FaMobileAlt,
+  FaUserCheck, FaCalendarCheck, FaCheckCircle 
+} from "react-icons/fa";
 
-/* ---------- Consult Categories Data ---------- */
-const consultData = [
-  { img: "/images/pregnancy.png", title: "Period doubts or Pregnancy" },
-  { img: "/images/acne.png", title: "Acne, pimple or skin issues" },
-  { img: "/images/performance.svg", title: "Performance issues in bed" },
-  { img: "/images/cold.png", title: "Cold, cough or fever" },
-  { img: "/images/child.svg", title: "Child not feeling well" },
-  { img: "/images/depression.png", title: "Depression or anxiety" },
-];
-
-/* ---------- Reusable Cards ---------- */
-const Card = ({ title, desc }) => (
-  <div className="bg-white/70 backdrop-blur-lg p-4 rounded-2xl shadow-md border border-blue-100 text-center hover:scale-105 transition">
-    <h3 className="font-semibold text-blue-800">{title}</h3>
-    <p className="text-sm text-gray-600">{desc}</p>
-  </div>
-);
-
-const ImageServiceCard = ({ img, title, desc }) => (
-  <div className="bg-white/70 backdrop-blur-lg p-6 rounded-2xl shadow-lg border border-blue-100 hover:scale-105 transition cursor-pointer text-center">
-    <img
-      src={img}
-      alt={title}
-      className="w-20 h-20 mx-auto mb-4 rounded-xl object-cover shadow-md"
-    />
-    <h3 className="font-semibold text-xl text-blue-800 mb-2">{title}</h3>
-    <p className="text-sm text-gray-600">{desc}</p>
-  </div>
+// Reusable Card Component
+const Card = ({ children, className = "", hover = true }) => (
+  <motion.div 
+    whileHover={hover ? { scale: 1.05, y: -5 } : {}}
+    className={`bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl border border-blue-100/50 hover:shadow-2xl hover:border-blue-200 transition-all duration-500 overflow-hidden ${className}`}
+  >
+    {children}
+  </motion.div>
 );
 
 const Home = () => {
@@ -42,302 +27,300 @@ const Home = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      console.log('Searching for:', searchQuery);
-      // TODO: Implement search logic
+      console.log('Searching:', searchQuery);
     }
   };
 
+  const services = [
+    {
+      icon: FaStethoscope,
+      title: "Dentist",
+      desc: "Expert dental care and oral health consultations",
+      img: "/images/doctor-find.png",
+      color: "from-blue-500 to-indigo-500"
+    },
+    {
+      icon: FaUserMd,
+      title: "Gynecologist",
+      desc: "Comprehensive women’s health and pregnancy care",
+      img: "/images/pregnancy.png",
+      color: "from-indigo-500 to-purple-500"
+    },
+    {
+      icon: FaHeartbeat,
+      title: "Dietitian",
+      desc: "Personalized nutrition plans and weight management",
+      img: "/images/performance.svg",
+      color: "from-emerald-500 to-teal-500"
+    },
+    {
+      icon: FaRunning,
+      title: "Physiotherapist",
+      desc: "Injury recovery and physical rehabilitation",
+      img: "/images/child.svg",
+      color: "from-orange-500 to-red-500"
+    }
+  ];
+
+  const whyUs = [
+    {
+      icon: FaShieldAlt,
+      title: "Verified Doctors",
+      desc: "All doctors are certified with 5+ years experience"
+    },
+    {
+      icon: FaClock,
+      title: "Instant Booking",
+      desc: "Book appointments within 30 seconds, no waiting"
+    },
+    {
+      icon: FaMobileAlt,
+      title: "24/7 Support",
+      desc: "Round the clock assistance via call or chat"
+    }
+  ];
+
+  const howItWorks = [
+    {
+      step: "1",
+      icon: FaUserCheck,
+      title: "Choose Doctor",
+      desc: "Search and select from top-rated specialists"
+    },
+    {
+      step: "2",
+      icon: FaCalendarCheck,
+      title: "Book Slot",
+      desc: "Pick your preferred date and time instantly"
+    },
+    {
+      step: "3",
+      icon: FaCheckCircle,
+      title: "Get Care",
+      desc: "Visit clinic or get online consultation"
+    }
+  ];
+
   return (
-    <div className="bg-gradient-to-b from-blue-100 via-blue-200 to-blue-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 min-h-screen">
-      {/* Enhanced Sticky Navbar */}
-      <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="sticky top-0 z-50 flex justify-between items-center px-6 lg:px-12 py-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border-b border-white/50 dark:border-slate-700/50"
-      >
-        <motion.div 
-          className="flex items-center gap-8"
-          whileHover={{ scale: 1.05 }}
-        >
-          <Link to="/" className="text-3xl font-black bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">
-            MediTech
+    <div className="bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50 min-h-screen">
+      {/* Navbar */}
+      <nav className="sticky top-0 z-50 px-6 lg:px-16 py-4 bg-white/95 backdrop-blur-xl shadow-lg border-b border-blue-100/50">
+        <div className="flex justify-between items-center max-w-7xl mx-auto">
+          <Link to="/" className="text-3xl font-black bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">
+            MediTrack
           </Link>
-          <div className="hidden md:flex gap-6">
-            <Link to="/" className="font-semibold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">Home</Link>
-            <span className="font-semibold text-gray-700 dark:text-gray-300 cursor-not-allowed opacity-50">Doctors</span>
-            <span className="font-semibold text-gray-700 dark:text-gray-300 cursor-not-allowed opacity-50">Services</span>
-            <span className="font-semibold text-gray-700 dark:text-gray-300 cursor-not-allowed opacity-50">About</span>
-          </div>
-        </motion.div>
-
-        <div className="flex items-center gap-4">
-          {/* Dark mode toggle */}
-          <button 
-            type="button" 
-            onClick={toggleTheme}
-            className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 transition"
-            aria-label="Toggle dark mode"
-          >
-            {isDark ? (
-              <Sun className="w-5 h-5 text-yellow-400" />
-            ) : (
-              <Moon className="w-5 h-5 text-slate-400" />
-            )}
-          </button>
-          
-          <Link to="/login">
-            <motion.button 
-              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-2xl font-semibold shadow-lg hover:shadow-xl"
-              whileHover={{ scale: 1.05, y: -1 }}
-              whileTap={{ scale: 0.95 }}
+          <div className="flex items-center gap-4 lg:gap-8">
+            <Link to="/login" className="px-6 py-2 text-lg font-semibold text-blue-700 hover:text-blue-900 transition-colors">
+              Login
+            </Link>
+            <Link to="/register" className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl hover:from-blue-700 transition-all">
+              Get Started
+            </Link>
+            <button 
+              onClick={toggleTheme}
+              className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors"
             >
-              Login Now
-            </motion.button>
-          </Link>
-
-          {/* Mobile menu button */}
-          <button type="button" className="md:hidden p-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
-      </motion.nav>
+      </nav>
 
-      {/* Enhanced Hero */}
-      <section 
-        className="relative min-h-[70vh] flex items-center justify-center text-center py-16 px-4 overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(135deg, rgba(59,130,246,0.8) 0%, rgba(147,51,234,0.8) 50%, rgba(59,130,246,0.8) 100%), linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4))`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
-      >
-        {/* Floating particles */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-300/20 rounded-full blur-xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-48 h-48 bg-purple-300/20 rounded-full blur-xl animate-pulse delay-300" />
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-4xl mx-auto"
-        >
+      {/* Hero Section */}
+      <section className="relative py-28 px-6 lg:px-10 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/src/assets/hero.png')] bg-cover bg-center opacity-5 mix-blend-multiply" />
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
           <motion.h1 
-            className="text-5xl md:text-7xl font-black bg-gradient-to-r from-blue-900 to-purple-800 bg-clip-text text-transparent mb-6 leading-tight"
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ type: 'spring', stiffness: 100 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-8 leading-tight"
           >
-            Advanced <span className="text-blue-600">MediTech</span>
-            <br />
-            Healthcare System
+            Book Top Doctors
+            <span className="block text-blue-600 text-6xl md:text-7xl lg:text-8xl">Instantly</span>
           </motion.h1>
           <motion.p 
-            className="text-xl md:text-2xl text-white/90 mb-8 font-medium"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl md:text-2xl lg:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            AI + Microservices Powered Smart Healthcare
+            Connect with 10,000+ verified doctors across 50+ specialties. 
+            Book clinic visits or video consultations in 30 seconds.
           </motion.p>
-
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, type: 'spring' }}
+            transition={{ delay: 0.4 }}
+            className="flex flex-col lg:flex-row gap-6 justify-center items-center max-w-4xl mx-auto"
           >
-            <motion.div 
-              className="flex bg-white/20 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden w-full max-w-2xl border border-white/30"
-              whileHover={{ scale: 1.02, boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)' }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <form onSubmit={handleSearch} className="flex w-full">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="🔍 Find doctors, search symptoms, book tests..."
-                  className="flex-1 px-6 py-4 bg-transparent outline-none text-white placeholder-gray-300 text-lg"
-                />
-                <motion.button 
-                  type="submit"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 flex items-center gap-3 font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all backdrop-blur-sm"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaSearch className="w-5 h-5" /> 
-                  <span className="uppercase tracking-wide">Search</span>
-                </motion.button>
-              </form>
-            </motion.div>
-            
-            <motion.button 
-              type="button"
-              className="bg-white text-blue-900 px-8 py-4 rounded-2xl font-bold shadow-2xl hover:shadow-3xl backdrop-blur-sm border-2 border-white/30 flex items-center gap-2"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get Started 
-              <Sun className="w-5 h-5" />
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <motion.div
-                initial={{ scale: 0.9 }}
-                whileInView={{ scale: 1 }}
-                className="bg-white/60 backdrop-blur-sm p-8 rounded-3xl shadow-xl hover:scale-105 transition-transform"
-                transition={{ duration: 0.6 }}
+            <form onSubmit={handleSearch} className="flex w-full max-w-2xl bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-blue-200">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search doctors, symptoms or tests..."
+                className="flex-1 px-8 py-5 text-lg bg-transparent outline-none text-gray-800 placeholder-gray-500"
+              />
+              <button 
+                type="submit"
+                className="bg-blue-600 text-white px-8 py-5 font-bold text-lg flex items-center gap-2 hover:bg-blue-700 transition-colors"
               >
-                <div className="text-4xl md:text-5xl font-black text-blue-600 mb-2">10K+</div>
-                <div className="text-xl font-semibold text-gray-800">Expert Doctors</div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-white/60 backdrop-blur-sm p-8 rounded-3xl shadow-xl"
-              >
-                <div className="text-4xl md:text-5xl font-black text-green-600 mb-2">1M+</div>
-                <div className="text-xl font-semibold text-gray-800">Happy Patients</div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white/60 backdrop-blur-sm p-8 rounded-3xl shadow-xl"
-              >
-                <div className="text-4xl md:text-5xl font-black text-purple-600 mb-2">24/7</div>
-                <div className="text-xl font-semibold text-gray-800">Support Available</div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-white/60 backdrop-blur-sm p-8 rounded-3xl shadow-xl"
-              >
-                <div className="text-4xl md:text-5xl font-black text-orange-600 mb-2">99.9%</div>
-                <div className="text-xl font-semibold text-gray-800">Success Rate</div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* -------- Consult Categories Section -------- */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="bg-white py-14 px-6"
-      >
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800">
-              Consult top doctors online for any health concern
-            </h2>
-            <p className="text-gray-500 mt-2">
-              Private online consultations with verified doctors in all specialists
-            </p>
-          </div>
-
-          <button type="button" className="mt-4 md:mt-0 border border-blue-500 text-blue-600 px-5 py-2 rounded-lg hover:bg-blue-50">
-            View All Specialities
-          </button>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-10 text-center max-w-7xl mx-auto">
-          {consultData.map((item, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <div className="w-28 h-28 rounded-full bg-blue-50 flex items-center justify-center shadow">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="w-20 h-20 object-contain"
-                />
-              </div>
-              <h3 className="mt-4 text-gray-800 font-medium text-sm">
-                {item.title}
-              </h3>
-              <button type="button" className="mt-2 text-blue-600 text-xs font-semibold">
-                CONSULT NOW
+                <FaSearch />
+                Search
               </button>
+            </form>
+            <Link 
+              to="/doctors"
+              className="px-12 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:from-blue-700 flex items-center gap-3 whitespace-nowrap"
+            >
+              Book Now <FaArrowRight />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-28 px-6 lg:px-10 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Specialty Services</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Choose from our top medical specialties</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <Card key={service.title} className="p-10 text-center hover:-translate-y-2" hover>
+                  <div className={`w-20 h-20 mx-auto mb-8 rounded-2xl bg-gradient-to-r ${service.color} flex items-center justify-center shadow-2xl`}>
+                    <Icon className="w-10 h-10 text-white" />
+                  </div>
+                  <img src={service.img} alt={service.title} className="w-32 h-32 mx-auto mb-6 rounded-2xl shadow-xl object-cover" />
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                  <p className="text-gray-600 mb-8 leading-relaxed">{service.desc}</p>
+                  <button className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl hover:shadow-xl transition-all">
+                    Book Now
+                  </button>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-28 px-6 lg:px-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Why Choose MediTrack?</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Trusted by 1M+ patients</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {whyUs.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <Card key={feature.title} className="p-12 lg:p-16 hover:bg-gradient-to-br from-blue-50 to-indigo-50">
+                  <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                    <Icon className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{feature.title}</h3>
+                  <p className="text-gray-600 leading-relaxed text-center">{feature.desc}</p>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-28 px-6 lg:px-10 bg-gradient-to-r from-indigo-50 to-blue-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">How It Works</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">3 simple steps to your appointment</p>
+          </div>
+          <div className="relative">
+            {/* Desktop horizontal */}
+            <div className="hidden lg:grid grid-cols-3 gap-12 items-center">
+              {howItWorks.map((step, index) => {
+                const Icon = step.icon;
+                const isMiddle = index === 1;
+                return (
+                  <div key={step.title} className={`relative ${!isMiddle && 'text-center'}`}>
+                    {!isMiddle && (
+                      <div className="absolute -left-12 top-1/2 w-24 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-400 transform -translate-y-1/2 hidden lg:block" />
+                    )}
+                    <Card className="p-10 lg:p-12 max-w-md mx-auto relative z-10">
+                      <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl">
+                        <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center font-bold text-white text-lg">
+                          {step.step}
+                        </div>
+                      </div>
+                      <Icon className="w-16 h-16 text-blue-600 mx-auto mb-6" />
+                      <h3 className="text-2xl font-bold text-gray-900 mb-4">{step.title}</h3>
+                      <p className="text-gray-600">{step.desc}</p>
+                    </Card>
+                    {isMiddle && (
+                      <div className="absolute right-12 top-1/2 w-24 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-400 transform -translate-y-1/2" />
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          ))}
+            {/* Mobile vertical stack */}
+            <div className="lg:hidden space-y-12">
+              {howItWorks.map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <div key={step.title} className="flex items-center space-x-6">
+                    <div className="w-20 flex-shrink-0">
+                      <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-2xl mx-auto">
+                        <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center font-bold text-white text-lg">
+                          {step.step}
+                        </div>
+                      </div>
+                    </div>
+                    <Card className="flex-1 p-8">
+                      <Icon className="w-12 h-12 text-blue-600 mb-4" />
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
+                      <p className="text-gray-600">{step.desc}</p>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </motion.div>
+      </section>
 
-      {/* Medical Services Cards */}
-      <div className="mt-16 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        <ImageServiceCard
-          img="/images/doctor-video.png"
-          title="Instant Video Consultation"
-          desc="Connect within 60 secs"
-          onClick={() => console.log('Video consultation clicked')}
-        />
-        <ImageServiceCard
-          img="/images/doctor-find.png"
-          title="Find Doctors Near You"
-          desc="Confirmed appointments"
-          onClick={() => console.log('Find doctors clicked')}
-        />
-        <ImageServiceCard
-          img="/images/lab-test.png"
-          title="Lab Tests"
-          desc="Safe and trusted lab tests"
-          onClick={() => console.log('Lab tests clicked')}
-        />
-        <ImageServiceCard
-          img="/images/surgery.png"
-          title="Surgeries"
-          desc="Safe and trusted surgery centers"
-          onClick={() => console.log('Surgeries clicked')}
-        />
-      </div>
-
-      {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 mt-16">
-        <Card title="Book Appointment" desc="Easy doctor booking" />
-        <Card title="Online Consultation" desc="Talk with doctors" />
-        <Card title="Lab Tests" desc="Book medical tests" />
-      </div>
-
-      {/* AI Section */}
-      <div className="mt-16 px-6">
-        <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-8 shadow-lg">
-          <h2 className="text-2xl font-bold text-blue-900 mb-2">
-            AI Powered Healthcare
-          </h2>
-          <button type="button" className="bg-blue-600 text-white px-5 py-2 rounded-xl flex items-center gap-2" onClick={() => console.log('AI Doctor clicked')}>
-            <FaRobot /> Ask AI Doctor
-          </button>
+      {/* CTA Footer Section */}
+      <section className="py-28 px-6 lg:px-10 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-black mb-6">Ready to book your appointment?</h2>
+          <p className="text-2xl text-blue-100 mb-12 max-w-2xl mx-auto">Join 1M+ happy patients who trust MediTrack</p>
+          <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
+            <Link 
+              to="/register"
+              className="px-12 py-5 bg-white text-blue-700 font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:bg-gray-50 transition-all whitespace-nowrap"
+            >
+              Get Started Free
+            </Link>
+            <Link 
+              to="/doctors"
+              className="px-12 py-5 border-2 border-white text-white font-bold text-xl rounded-3xl hover:bg-white hover:text-blue-700 transition-all"
+            >
+              View Doctors
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Footer */}
-      <div className="mt-16 py-6 text-center text-gray-600">
-        Docker • Kubernetes • AWS • GCP • Azure
-      </div>
+      {/* Simple Footer */}
+      <footer className="py-12 px-6 text-center text-gray-500 text-sm border-t border-gray-200 bg-white">
+        © 2024 MediTrack. All rights reserved. | Premium Healthcare Booking Platform
+      </footer>
     </div>
   );
 };
 
 export default Home;
+
