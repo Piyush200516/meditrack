@@ -4,17 +4,17 @@ import { motion } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 import { 
-  FaSearch, FaArrowRight, 
-  FaStethoscope, FaUserMd, FaHeartbeat, FaRunning,
+  FaSearch, FaArrowRight, FaStethoscope, FaHeartbeat, FaClipboardList, FaExclamationTriangle,
   FaShieldAlt, FaClock, FaMobileAlt,
-  FaUserCheck, FaCalendarCheck, FaCheckCircle 
+  FaUserCheck, FaCalendarCheck, FaCheckCircle,
+  FaPhone 
 } from "react-icons/fa";
 
 // Reusable Card Component
 const Card = ({ children, className = "", hover = true }) => (
   <motion.div 
-    whileHover={hover ? { scale: 1.05, y: -5 } : {}}
-    className={`bg-white/80 backdrop-blur-xl rounded-3xl shadow-xl border border-blue-100/50 hover:shadow-2xl hover:border-blue-200 transition-all duration-500 overflow-hidden ${className}`}
+    whileHover={hover ? { y: -2, scale: 1.02 } : {}}
+    className={`bg-white rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ${className}`}
   >
     {children}
   </motion.div>
@@ -34,31 +34,27 @@ const Home = () => {
   const services = [
     {
       icon: FaStethoscope,
-      title: "Dentist",
-      desc: "Expert dental care and oral health consultations",
-      img: "/images/doctor-find.png",
-      color: "from-blue-500 to-indigo-500"
+      title: "Telemedicine",
+      desc: "Online consultations with top doctors from anywhere",
+      img: "/images/doctor-video.png"
     },
     {
-      icon: FaUserMd,
-      title: "Gynecologist",
-      desc: "Comprehensive women’s health and pregnancy care",
-      img: "/images/pregnancy.png",
-      color: "from-indigo-500 to-purple-500"
+      icon: FaClipboardList,
+      title: "Lab Tests",
+      desc: "Home sample collection for all diagnostic tests",
+      img: "/images/lab-test.png"
     },
     {
       icon: FaHeartbeat,
-      title: "Dietitian",
-      desc: "Personalized nutrition plans and weight management",
-      img: "/images/performance.svg",
-      color: "from-emerald-500 to-teal-500"
+      title: "Wellness",
+      desc: "Health checkups and preventive care programs",
+      img: "/images/performance.svg"
     },
     {
-      icon: FaRunning,
-      title: "Physiotherapist",
-      desc: "Injury recovery and physical rehabilitation",
-      img: "/images/child.svg",
-      color: "from-orange-500 to-red-500"
+      icon: FaExclamationTriangle,
+      title: "Emergency",
+      desc: "24/7 ambulance and urgent care services",
+      img: "/images/doctor-find.png"
     }
   ];
 
@@ -127,79 +123,74 @@ const Home = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative py-28 px-6 lg:px-10 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/src/assets/hero.png')] bg-cover bg-center opacity-5 mix-blend-multiply" />
-        <div className="relative z-10 max-w-6xl mx-auto text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent mb-8 leading-tight"
-          >
-            Book Top Doctors
-            <span className="block text-blue-600 text-6xl md:text-7xl lg:text-8xl">Instantly</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl lg:text-3xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
-          >
-            Connect with 10,000+ verified doctors across 50+ specialties. 
-            Book clinic visits or video consultations in 30 seconds.
-          </motion.p>
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col lg:flex-row gap-6 justify-center items-center max-w-4xl mx-auto"
-          >
-            <form onSubmit={handleSearch} className="flex w-full max-w-2xl bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-blue-200">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search doctors, symptoms or tests..."
-                className="flex-1 px-8 py-5 text-lg bg-transparent outline-none text-gray-800 placeholder-gray-500"
-              />
-              <button 
-                type="submit"
-                className="bg-blue-600 text-white px-8 py-5 font-bold text-lg flex items-center gap-2 hover:bg-blue-700 transition-colors"
-              >
-                <FaSearch />
-                Search
-              </button>
-            </form>
-            <Link 
-              to="/doctors"
-              className="px-12 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:from-blue-700 flex items-center gap-3 whitespace-nowrap"
+      <section className="py-24 bg-gradient-to-r from-blue-50 to-blue-100">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col lg:flex-row items-center gap-16">
+          <div className="lg:w-1/2 text-left">
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-5xl font-bold tracking-tight text-gray-800 mb-6 leading-tight"
             >
-              Book Now <FaArrowRight />
-            </Link>
+              Your Health, Our Priority
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-gray-500 mb-8 max-w-lg"
+            >
+              Connect with verified doctors for consultations, diagnostics, and wellness care. Premium healthcare made simple.
+            </motion.p>
+            <motion.div 
+              className="flex gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <Link 
+                to="/doctors"
+                className="px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                Book Now
+              </Link>
+              <Link 
+                to="/register"
+                className="px-6 py-3 border border-gray-300 text-gray-800 font-medium rounded-xl hover:scale-105 transition-all duration-300"
+              >
+                Learn More
+              </Link>
+            </motion.div>
+          </div>
+          <motion.div className="lg:w-1/2" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6 }}>
+            <img src="/images/doctor-video.png" alt="Healthcare Hero" className="rounded-3xl shadow-2xl w-full h-[400px] object-cover" />
           </motion.div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-28 px-6 lg:px-10 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Specialty Services</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Choose from our top medical specialties</p>
+      {/* Services Section */}
+      <section className="py-24 bg-blue-50">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Our Services</h2>
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">Comprehensive healthcare solutions at your fingertips</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <Card key={service.title} className="p-10 text-center hover:-translate-y-2" hover>
-                  <div className={`w-20 h-20 mx-auto mb-8 rounded-2xl bg-gradient-to-r ${service.color} flex items-center justify-center shadow-2xl`}>
-                    <Icon className="w-10 h-10 text-white" />
+                <Card key={service.title} className="overflow-hidden p-0 hover:shadow-2xl" hover>
+                  <img src={service.img} alt={service.title} className="w-full h-48 object-cover" />
+                  <div className="p-8">
+                    <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                      <Icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">{service.title}</h3>
+                    <p className="text-gray-500 mb-6 text-center leading-relaxed">{service.desc}</p>
+                    <button className="w-full py-3 px-6 bg-blue-600 text-white font-medium rounded-xl hover:scale-105 transition-all duration-300">
+                      Book Service
+                    </button>
                   </div>
-                  <img src={service.img} alt={service.title} className="w-32 h-32 mx-auto mb-6 rounded-2xl shadow-xl object-cover" />
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                  <p className="text-gray-600 mb-8 leading-relaxed">{service.desc}</p>
-                  <button className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-2xl hover:shadow-xl transition-all">
-                    Book Now
-                  </button>
                 </Card>
               );
             })}
@@ -208,22 +199,22 @@ const Home = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-28 px-6 lg:px-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Why Choose MediTrack?</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Trusted by 1M+ patients</p>
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Why Choose Us</h2>
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">Experience premium healthcare with confidence</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {whyUs.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={feature.title} className="p-12 lg:p-16 hover:bg-gradient-to-br from-blue-50 to-indigo-50">
-                  <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                <Card key={feature.title} className="p-10 text-center hover:-translate-y-2" hover>
+                  <div className="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-lg">
                     <Icon className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-center">{feature.desc}</p>
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-4">{feature.title}</h3>
+                  <p className="text-gray-500 leading-relaxed">{feature.desc}</p>
                 </Card>
               );
             })}
@@ -232,83 +223,50 @@ const Home = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-28 px-6 lg:px-10 bg-gradient-to-r from-indigo-50 to-blue-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">How It Works</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">3 simple steps to your appointment</p>
+      {/* How It Works */}
+      <section className="py-24 bg-blue-50">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">How It Works</h2>
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">Simple 3-step process to get the care you need</p>
           </div>
-          <div className="relative">
-            {/* Desktop horizontal */}
-            <div className="hidden lg:grid grid-cols-3 gap-12 items-center">
-              {howItWorks.map((step, index) => {
-                const Icon = step.icon;
-                const isMiddle = index === 1;
-                return (
-                  <div key={step.title} className={`relative ${!isMiddle && 'text-center'}`}>
-                    {!isMiddle && (
-                      <div className="absolute -left-12 top-1/2 w-24 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-400 transform -translate-y-1/2 hidden lg:block" />
-                    )}
-                    <Card className="p-10 lg:p-12 max-w-md mx-auto relative z-10">
-                      <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl">
-                        <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center font-bold text-white text-lg">
-                          {step.step}
-                        </div>
-                      </div>
-                      <Icon className="w-16 h-16 text-blue-600 mx-auto mb-6" />
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">{step.title}</h3>
-                      <p className="text-gray-600">{step.desc}</p>
-                    </Card>
-                    {isMiddle && (
-                      <div className="absolute right-12 top-1/2 w-24 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-400 transform -translate-y-1/2" />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            {/* Mobile vertical stack */}
-            <div className="lg:hidden space-y-12">
-              {howItWorks.map((step, index) => {
-                const Icon = step.icon;
-                return (
-                  <div key={step.title} className="flex items-center space-x-6">
-                    <div className="w-20 flex-shrink-0">
-                      <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-2xl mx-auto">
-                        <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center font-bold text-white text-lg">
-                          {step.step}
-                        </div>
-                      </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center max-w-4xl mx-auto">
+            {howItWorks.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <Card key={step.title} className="text-center p-8 relative" hover>
+                  <div className="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center font-bold text-2xl text-blue-600 mx-auto -mt-6 relative z-10">
+                      {step.step}
                     </div>
-                    <Card className="flex-1 p-8">
-                      <Icon className="w-12 h-12 text-blue-600 mb-4" />
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                      <p className="text-gray-600">{step.desc}</p>
-                    </Card>
                   </div>
-                );
-              })}
-            </div>
+                  <Icon className="w-16 h-16 text-blue-600 mx-auto mb-6" />
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-4">{step.title}</h3>
+                  <p className="text-gray-500 leading-relaxed">{step.desc}</p>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* CTA Footer Section */}
-      <section className="py-28 px-6 lg:px-10 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-black mb-6">Ready to book your appointment?</h2>
-          <p className="text-2xl text-blue-100 mb-12 max-w-2xl mx-auto">Join 1M+ happy patients who trust MediTrack</p>
-          <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
+      {/* Final CTA */}
+      <section className="py-24 bg-blue-600 text-white">
+        <div className="max-w-7xl mx-auto px-8 text-center">
+          <h2 className="text-3xl font-semibold mb-4">Ready to start your healthcare journey?</h2>
+          <p className="text-lg text-blue-100 mb-12 max-w-2xl mx-auto">Join thousands of satisfied patients</p>
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
             <Link 
               to="/register"
-              className="px-12 py-5 bg-white text-blue-700 font-bold text-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:bg-gray-50 transition-all whitespace-nowrap"
+              className="px-8 py-4 bg-white text-blue-600 font-medium rounded-xl hover:scale-105 transition-all duration-300 shadow-xl text-lg"
             >
               Get Started Free
             </Link>
             <Link 
               to="/doctors"
-              className="px-12 py-5 border-2 border-white text-white font-bold text-xl rounded-3xl hover:bg-white hover:text-blue-700 transition-all"
+              className="px-8 py-4 border-2 border-white text-white font-medium rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-300 text-lg"
             >
-              View Doctors
+              View All Doctors
             </Link>
           </div>
         </div>

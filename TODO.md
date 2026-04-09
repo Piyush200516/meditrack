@@ -1,17 +1,13 @@
-## MediTrack Home.jsx Redesign Progress
+# MediTrack Home.jsx Premium Redesign - TODO
 
-**Status: In Progress**
+## Plan Breakdown & Progress
+✅ **Step 1**: Analyzed files (Home.jsx, package.json, App.jsx, index.css) - understood existing structure/dep.
 
-### Completed:
-- [x] Analyzed project files (Home.jsx, deps, App.jsx)
-- [x] Confirmed comprehensive redesign plan with user
-- [x] Created this TODO.md
+✅ **Step 2**: Created detailed edit plan per design rules - user approved.
 
-### Steps to Complete:
-- [ ] Implement full redesign in Home.jsx (navbar/hero/services/why-us/how-works/cta)
-- [ ] Update TODO.md with completion
-- [ ] Test locally (`cd meditech-frontend && npm run dev`)
-- [ ] Attempt completion
+**Next Steps**:
+✅ **Step 3**: Edit meditech-frontend/src/pages/Home.jsx with full redesign (sections py-24, colors/typo exact, cards/buttons, react-icons, hero img right, 4 services generic healthcare).
+✅ **Step 4**: Update TODO.md with completion.
+- [ ] **Step 5**: Suggest `npm run dev` to preview, attempt_completion.
 
-**Target: Practo/MediBuddy-style premium SaaS landing page with exact sections.**
-
+*Estimated: Single edit implements all.*
