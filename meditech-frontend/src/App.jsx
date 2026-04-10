@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import GlobalLayout from "./components/Layout/GlobalLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -9,22 +12,49 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <Routes>
-          {/* Home Page */}
-          <Route path="/" element={<Home />} />
-          <Route path="/doctors" element={<div className="p-8 text-center"><h1 className="text-4xl font-bold text-gray-800 mb-4">Doctors Directory</h1><p className="text-xl text-gray-600">Coming Soon 🚀</p></div>} />
-          <Route path="/services" element={<div className="p-8 text-center"><h1 className="text-4xl font-bold text-gray-800 mb-4">Our Services</h1><p className="text-xl text-gray-600">Coming Soon 🚀</p></div>} />
-          <Route path="/about" element={<div className="p-8 text-center"><h1 className="text-4xl font-bold text-gray-800 mb-4">About MediTech</h1><p className="text-xl text-gray-600">Coming Soon 🚀</p></div>} />
+        <AuthProvider>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          {/* Login Page */}
-          <Route path="/login" element={<Login />} />
+            {/* Protected Role Routes */}
+            <Route element={<GlobalLayout />}>
+              {/* Patient */}
+              <Route path="/patient/*" element={
+                <ProtectedRoute allowedRoles={['patient']}>
+                  <div>Patient Dashboard - Coming Soon</div>
+                </ProtectedRoute>
+              } />
 
-          {/* Register Page */}
-          <Route path="/register" element={<Register />} />
-        </Routes>
+              {/* Doctor */}
+              <Route path="/doctor/*" element={
+                <ProtectedRoute allowedRoles={['doctor']}>
+                  <div>Doctor Dashboard - Coming Soon</div>
+                </ProtectedRoute>
+              } />
+
+              {/* Hospital Admin */}
+              <Route path="/hospital/*" element={
+                <ProtectedRoute allowedRoles={['hospital']}>
+                  <div>Hospital Admin - Coming Soon</div>
+                </ProtectedRoute>
+              } />
+
+              {/* Super Admin */}
+              <Route path="/super/*" element={
+                <ProtectedRoute allowedRoles={['super']}>
+                  <div>Super Admin - Coming Soon</div>
+                </ProtectedRoute>
+              } />
+            </Route>
+          </Routes>
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
 }
 
 export default App;
+
