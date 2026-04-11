@@ -72,19 +72,7 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="mb-6">
-              <label className="text-sm text-gray-600 mb-2 block">Login As</label>
-              <select 
-                value={role} 
-                onChange={(e) => setRole(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="patient">Patient</option>
-                <option value="doctor">Doctor</option>
-                <option value="hospital">Hospital Admin</option>
-                <option value="super">Super Admin</option>
-              </select>
-            </div>
+            
 
             <button 
               type="submit" 
