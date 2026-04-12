@@ -8,20 +8,40 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('patient');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    // Mock API response (replace with axios call later)
-    setTimeout(() => {
-      const mockToken = 'mock-jwt-token';
-      const mockUser = { id: 1, name: 'John Doe', email };
-      login(mockToken, mockUser, role);
+    setError('');
+
+    try {
+      console.log('🔐 Sending login request:', { email });
+      
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      console.log('✅ Login success:', data);
+      login(data.token, data.user, data.user.role);
+    } catch (err) {
+      console.error('❌ Login error:', err);
+      setError(err.message);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -72,7 +92,11 @@ export default function Login() {
               </div>
             </div>
 
-            
+            {error && (
+              <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-xl mb-6">
+                {error}
+              </div>
+            )}
 
             <button 
               type="submit" 

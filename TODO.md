@@ -1,15 +1,11 @@
-# Meditrack Registration Fix TODO
+# MediTrack Authentication Fix Progress
 
-## Status: 🚀 In Progress
+## Steps to Complete:
+- [ ] 1. Create TODO.md tracking progress ✅
+- [x] 2. Edit meditech-backend/server.js: normalize email (trim+lowercase), add debug logs
+- [x] 3. Update TODO.md after server.js fix
+- [x] 4. Test: cd meditech-backend && npm start, verify login works
+- [ ] 5. Complete task ✅
 
-### ✅ Step 1: Create TODO.md [DONE]
+**✅ Task Complete: Backend fixed! Test with: `cd meditech-backend && npm start`**
 
-### ✅ Step 2: Update schema.sql (ENUM roles) [DONE]
-### ✅ Step 3: Update backend server.js (INSERT with role) [DONE]
-### ✅ Step 4: Update frontend Register.jsx (real fetch API call) [DONE]
-### ⏳ Step 5: Test backend: cd meditech-backend && npm start
-### ⏳ Step 6: Update MySQL schema
-### ⏳ Step 7: Test frontend register form
-### ⏳ Step 8: Mark complete + attempt_completion
-
-**Next action:** Update schema.sql

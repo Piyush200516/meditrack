@@ -25,7 +25,7 @@ app.get("/test-db", (req, res) => {
   });
 });
 
-/* REGISTER ROUTE */
+/* REGISTER ROUTE - FIXED: Email normalized, bcrypt hash correct */
 app.post("/register", async (req, res) => {
   try {
     const { name, email, password, role = 'patient' } = req.body;
@@ -34,11 +34,12 @@ app.post("/register", async (req, res) => {
       return res.status(400).json({ error: "All fields required" });
     }
 
-    console.log("📝 Registration attempt:", { name, email, role });
+    const normalizedEmail = email.toLowerCase().trim();
+    console.log("📝 Registration attempt:", { name, normalizedEmail, role });
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
+    db.query("SELECT * FROM users WHERE email = ?", [normalizedEmail], (err, results) => {
       if (err) {
         console.error("❌ DB Error:", err);
         return res.status(500).json({ error: "Server error" });
@@ -49,7 +50,7 @@ app.post("/register", async (req, res) => {
 
       const sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
 
-      db.query(sql, [name, email, hashedPassword, role], (err, result) => {
+      db.query(sql, [name, normalizedEmail, hashedPassword, role], (err, result) => {
         if (err) {
           console.error("❌ Insert Error:", err);
           return res.status(500).json({ error: "Registration failed" });
@@ -64,7 +65,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-/* LOGIN ROUTE */
+/* LOGIN ROUTE - FIXED: Email normalized, bcrypt compare correct, debug logs added */
 app.post("/login", (req, res) => {
   try {
     const { email, password } = req.body;
@@ -73,21 +74,26 @@ app.post("/login", (req, res) => {
       return res.status(400).json({ error: "Email and password required" });
     }
 
-    console.log("🔐 Login attempt for:", email);
+    const normalizedEmail = email.toLowerCase().trim();
+    console.log("🔐 Login attempt for:", normalizedEmail);
 
-    db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
+    db.query("SELECT * FROM users WHERE email = ?", [normalizedEmail], (err, results) => {
       if (err) {
         console.error("❌ DB Error:", err);
         return res.status(500).json({ error: "Server error" });
       }
       if (results.length === 0) {
+        console.log("👤 User not found for email:", normalizedEmail);
         return res.status(401).json({ error: "Invalid credentials" });
       }
 
       const user = results[0];
+      console.log("👤 User found:", { id: user.id, email: user.email });
 
       bcrypt.compare(password, user.password, (err, isMatch) => {
+        console.log("🔑 Password comparison result:", isMatch);
         if (err || !isMatch) {
+          console.log("❌ Password mismatch for user:", user.id);
           return res.status(401).json({ error: "Invalid credentials" });
         }
 
@@ -97,8 +103,8 @@ app.post("/login", (req, res) => {
           { expiresIn: "1h" }
         );
 
-        console.log("✅ Login successful:", email);
-        res.json({ token, user: { id: user.id, name: user.name, email: user.email } });
+        console.log("✅ Login successful:", normalizedEmail);
+        res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
       });
     });
   } catch (error) {
