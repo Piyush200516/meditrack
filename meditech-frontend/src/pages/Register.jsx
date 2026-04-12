@@ -11,6 +11,7 @@ export default function Register() {
     role: 'patient'
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,13 +24,34 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    // Mock registration - redirect to login
-    setTimeout(() => {
+    setError('');
+
+    try {
+      console.log('📤 Sending register request:', formData);
+      
+      const response = await fetch('http://localhost:5000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
+
+      console.log('✅ Register success:', data);
       alert('Registration successful! Please login.');
       navigate('/login');
+    } catch (err) {
+      console.error('❌ Register error:', err);
+      setError(err.message);
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -112,6 +134,12 @@ export default function Register() {
                 <option value="super">Super Admin</option>
               </select>
             </div>
+
+            {error && (
+              <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-xl mb-6">
+                {error}
+              </div>
+            )}
 
             <button 
               type="submit"

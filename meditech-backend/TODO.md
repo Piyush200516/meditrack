@@ -1,24 +1,25 @@
-# MySQL Connection Fix - Progress Tracker
+# MediTech Backend TODO - Server Fix Progress
 
-## Completed ✅
-- [x] Analyzed files: db.js already uses dotenv/env vars correctly (no hardcoding)
-- [x] Confirmed dependencies: mysql2, dotenv present in package.json
-- [x] Created this TODO.md
+## Server Startup & Auth Fix
 
-## To Complete ✅
-- [x] Update .env (confirmed by user)
-- [x] Create .gitignore (done ✅)
+✅ **Completed:**
+- [x] Step 1: Diagnosed issues (express v5 beta, missing setup files)
+- [x] Step 2: Fixed package.json (downgraded express to stable v4)
 
-**All steps completed! Ready to test.**
-3. `cd meditech-backend && npm start`
-4. Check console: "✅ MySQL Connected"
-5. Browser: http://localhost:5000/test-db → "✅ DB Connected Successfully"
+**Pending:**
+- [ ] Step 3: User setup:
+  - Copy .env.example → .env (add MySQL credentials)
+  - Install & run MySQL, create meditrack DB
+  - Run schema.sql to create users table
+- [ ] Step 4: `cd meditech-backend && npm install && npm start`
+- [ ] Step 5: Test endpoints: http://localhost:5000, /test-db, /register, /login
+- [ ] Step 6: Frontend integration (AuthContext updates)
 
-## Security Best Practices (Production)
-- Use unique strong password (not 'root')
-- .env in .gitignore (auto-done)
-- Use connection pool: `mysql.createPool({...})`
-- Limit DB user permissions
+**Next:** Run `npm start` after .env & DB setup. Check console for errors.
 
-**Next: Confirm .env update, then test.**
-
+**Test Commands:**
+```
+cd meditech-backend
+npm start
+# Visit: http://localhost:5000
+# Test DB: http://localhost:5000/test-db
