@@ -322,7 +322,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="py-12 px-8 text-center text-gray-500 text-sm border-t border-gray-200 bg-white/50 backdrop-blur-xl">
-        © 2024 MediTech AI Platform. Complete Healthcare Intelligence Solution | 
+        © 2026 MediTech AI Platform. Complete Healthcare Intelligence Solution | 
         <span className="text-blue-600 font-semibold ml-2">Production Ready</span>
       </footer>
     </div>
