@@ -12,57 +12,38 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [role, setRole] = useState(null);
+  const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    // Check token on init
-    const token = localStorage.getItem('token');
-    const storedRole = localStorage.getItem('role');
-    const storedUser = localStorage.getItem('user');
+    // Check patient on init
+    const storedPatient = localStorage.getItem('patient');
     
-    if (token && storedRole && storedUser) {
-      setUser(JSON.parse(storedUser));
-      setRole(storedRole);
+    if (storedPatient) {
+      setPatient(JSON.parse(storedPatient));
     }
     setLoading(false);
   }, []);
 
-  const login = (token, userData, userRole) => {
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('role', userRole);
-    setUser(userData);
-    setRole(userRole);
-    
-    // Redirect based on role
-    const rolePath = userRole === 'patient' ? '/patient/dashboard' :
-                     userRole === 'doctor' ? '/doctor/dashboard' :
-                     userRole === 'hospital' ? '/hospital/dashboard' :
-                     '/super/dashboard';
-    navigate(rolePath, { replace: true });
+  const login = (patientData) => {
+    localStorage.setItem('patient', JSON.stringify(patientData));
+    setPatient(patientData);
+    navigate('/home', { replace: true });
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('role');
-    setUser(null);
-    setRole(null);
+    localStorage.removeItem('patient');
+    setPatient(null);
     navigate('/login');
   };
 
   const value = {
-    user,
-    role,
+    patient,
     loading,
     login,
     logout,
-    isAuthenticated: !!user,
-    hasRole: (allowedRoles) => allowedRoles.includes(role),
+    isAuthenticated: !!patient,
   };
 
   return (

@@ -19,15 +19,20 @@ function App() {
         <AuthProvider>
           <Routes>
             {/* Public Routes */}
-            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
-            {/* Protected Role Routes - Nested under GlobalLayout */}
+            
+            {/* Protected Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            } />
             <Route element={<GlobalLayout />}>
               {/* Patient Routes */}
               <Route path="patient/dashboard" element={
-                <ProtectedRoute allowedRoles={['patient']}>
+                <ProtectedRoute>
                   <PatientDashboard />
                 </ProtectedRoute>
               } />
@@ -42,28 +47,28 @@ function App() {
                 </ProtectedRoute>
               } />
               <Route path="patient/*" element={<Navigate to="dashboard" replace />} />
-              
-              {/* Doctor */}
+              {/* Keep other roles for future */}
               <Route path="doctor/*" element={
-                <ProtectedRoute allowedRoles={['doctor']}>
+                <ProtectedRoute>
                   <div>Doctor Dashboard - Coming Soon</div>
                 </ProtectedRoute>
               } />
 
               {/* Hospital Admin */}
               <Route path="hospital/*" element={
-                <ProtectedRoute allowedRoles={['hospital']}>
+                <ProtectedRoute>
                   <div>Hospital Admin - Coming Soon</div>
                 </ProtectedRoute>
               } />
 
               {/* Super Admin */}
               <Route path="super/*" element={
-                <ProtectedRoute allowedRoles={['super']}>
+                <ProtectedRoute>
                   <div>Super Admin - Coming Soon</div>
                 </ProtectedRoute>
               } />
             </Route>
+            <Route path="/dashboard" element={<Navigate to="/patient/dashboard" replace />} />
           </Routes>
         </AuthProvider>
       </ThemeProvider>

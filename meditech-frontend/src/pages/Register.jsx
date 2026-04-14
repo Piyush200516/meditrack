@@ -7,8 +7,7 @@ export default function Register() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
-    role: 'patient'
+    password: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -29,7 +28,7 @@ export default function Register() {
     try {
       console.log('📤 Sending register request:', formData);
       
-      const response = await fetch('http://localhost:5000/register', {
+      const response = await fetch('http://localhost:3001/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -118,21 +117,6 @@ export default function Register() {
                   required
                 />
               </div>
-            </div>
-
-            <div className="mb-6">
-              <label className="text-sm text-gray-600 mb-2 block">Register As</label>
-              <select 
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-                className="w-full px-3 py-2 rounded-xl border focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="patient">Patient</option>
-                <option value="doctor">Doctor</option>
-                <option value="hospital">Hospital Admin</option>
-                <option value="super">Super Admin</option>
-              </select>
             </div>
 
             {error && (

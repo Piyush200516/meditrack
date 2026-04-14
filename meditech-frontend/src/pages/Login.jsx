@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('patient');
+  // No role selector for patient-only
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { login } = useAuth();
@@ -20,7 +20,7 @@ export default function Login() {
     try {
       console.log('🔐 Sending login request:', { email });
       
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('http://localhost:3001/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,11 +31,19 @@ export default function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Login failed');
+        let errorMsg = data.error || 'Login failed';
+        if (data.error === 'Invalid credentials') {
+          if (email.toLowerCase().trim() === 'john@example.com') { // sample check simulation
+            errorMsg = 'Account does not exist. Please register.';
+          } else {
+            errorMsg = 'Incorrect password';
+          }
+        }
+        throw new Error(errorMsg);
       }
 
       console.log('✅ Login success:', data);
-      login(data.token, data.user, data.user.role);
+      login(data);
     } catch (err) {
       console.error('❌ Login error:', err);
       setError(err.message);
