@@ -1,206 +1,185 @@
 # 🏥 MediTrack – Advanced Healthcare SaaS Platform
 
+---
+
 ## 🚀 Overview
 
-**MediTrack** is a scalable, multi-role healthcare SaaS platform inspired by modern digital healthcare systems. It connects patients, doctors, hospitals, medical stores, and insurance providers into a unified ecosystem.
+**MediTrack** is a **work-in-progress healthcare SaaS platform** aimed at connecting **patients, doctors, hospitals, medical stores, and insurance providers** into a single ecosystem.
 
-The platform is designed to simulate real-world healthcare workflows with a focus on scalability, performance, and user experience.
+The project focuses on building a **scalable, real-world healthcare system** using modern technologies and microservices architecture.
+
+---
+
+## 🏗️ System Architecture
+
+> 📌 Planned system architecture:
+
+<img src="./system-architecture.png" width="900"/>
 
 ---
 
-## 🏥 MediTeach System Architecture
+## 🎯 Project Objective
 
-<img src="https://github.com/user-attachments/assets/e835ca25-0e57-40c6-ae39-9bbf7405096e" width="800"/>
----
-
-## 👥 User Roles
-
-### 👤 Patient (User)
-
-* Register & login securely
-* Search and consult doctors
-* Book appointments
-* Order medicines
-* Apply for insurance & track claims
+- Build a **real-world healthcare SaaS application**
+- Design a **scalable microservices architecture**
+- Enable **multi-role system interaction**
+- Integrate **AI-based healthcare features (planned)**
 
 ---
+
+## ⚠️ Project Status
+
+> 🚧 This project is currently in the **initial development phase**
+
+### 🔹 Completed
+- Project planning  
+- System architecture design  
+
+### 🔹 In Progress
+- Frontend setup (React)  
+- Backend structure (Node.js)  
+
+### 🔹 Planned
+- Authentication system  
+- Appointment booking  
+- Payment integration  
+- AI features  
+
+---
+
+## 👥 User Roles (Planned)
+
+### 👤 Patient
+- Register & login  
+- Book appointments  
+- Order medicines  
 
 ### 👨‍⚕️ Doctor
-
-* Manage profile & availability
-* Accept/reject appointments
-* Provide consultation
-* Upload prescriptions
-
----
+- Manage availability  
+- Provide consultation  
 
 ### 🏥 Hospital
-
-* Manage doctors & staff
-* Track bed availability
-* Handle surgeries & patient records
-
----
+- Manage staff & records  
 
 ### 💊 Medical Store
+- Manage inventory  
 
-* Manage medicine inventory
-* Process online orders
-* Delivery tracking system
-
----
-
-### 🛡️ Insurance Company
-
-* Create insurance plans
-* Approve/reject claims
-* Provide cashless treatment support
+### 🛡️ Insurance Provider
+- Handle claims  
 
 ---
 
-## ⚡ Core Features
+## ⚡ Planned Features
 
-* 🔐 Role-Based Authentication (JWT)
-* 📅 Appointment Management System
-* 💳 Secure Payment Integration (Stripe / Razorpay)
-* 🧾 Insurance Claim Processing
-* 📊 Admin Dashboard with Analytics
-* 🔔 Real-Time Notifications (Socket.io)
-* 🤖 AI-Based Health Assistant (Future Scope)
+- 🔐 Authentication (JWT)  
+- 📅 Appointment System  
+- 💳 Payment Integration  
+- 🧾 Insurance Module  
+- 🔔 Notifications  
 
 ---
 
-## 🧠 Advanced Capabilities
+## 🤖 AI Features (Future Scope)
 
-* 🧩 Microservices Architecture (Kafka-based event system)
-* ⚡ Real-time data handling
-* 🔄 API rate limiting & security
-* 📈 Scalable database design
-* 🌐 Multi-tenant SaaS architecture
-* 📱 Fully responsive UI (Mobile-first)
+| Feature | Status |
+|--------|--------|
+| AI Symptom Checker | 🔴 Not Started |
+| Smart Doctor Recommendation | 🔴 Not Started |
+| Live Video Consultation | 🔴 Not Started |
+| Advanced Analytics | 🔴 Not Started |
+
+---
+
+## 🧩 System Design (Planned)
+
+- Authentication Service  
+- Appointment Service  
+- Payment Service  
+- AI Service  
+- Notification Service  
+
+---
+
+## 🔄 Expected Workflow
+
+1. User registers/logs in  
+2. Books appointment  
+3. Doctor confirms  
+4. Consultation happens  
+5. Further services handled  
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-
-* React.js (Vite)
-* Tailwind CSS (v4)
-* Redux Toolkit
-* Axios
+- React.js  
+- Tailwind CSS  
 
 ### Backend
-
-* Node.js
-* Express.js
-* Apache Kafka (Event Streaming)
+- Node.js  
+- Express.js  
 
 ### Database
+- MySQL  
 
-* MySQL
-
-### DevOps & Deployment
-
-* Docker (Containerization)
-* Vercel (Frontend Hosting)
-* Render / Railway (Backend)
-* AWS / PlanetScale (Database)
+### DevOps (Planned)
+- Docker  
+- Cloud Deployment  
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure (Planned)
 
-```id="0c9d1k"
+```bash
 meditrack/
  ├── frontend/
- │    ├── src/
- │    │    ├── components/
- │    │    ├── pages/
- │    │    ├── Home/
- │    │    ├── App.jsx
- │    │    └── main.jsx
- │
  ├── backend/
- │    ├── routes/
- │    ├── controllers/
- │    ├── models/
- │    ├── services/
- │
  ├── database/
  └── README.md
-```
+
+----
+
+ 🔒 Security (Planned)
+
+JWT Authentication
+Password Hashing
+Role-Based Access Control
+
+----
+
+
+📊 Use Cases
+
+Online consultation
+Hospital management
+Medicine ordering
+Insurance processing
+
+----
+
+🔮 Future Scope
+AI-based diagnosis
+Smart recommendation system
+Video consultation
+Mobile application
 
 ---
 
-## ⚙️ Setup Instructions
+🎓 Learning Goals
+SaaS Architecture Design
+Microservices Understanding
+Full Stack Development
+Real-world System Design
 
-### 🔹 Frontend Setup
+----
 
-```id="gzn1b7"
-cd frontend
-npm install
-npm run dev
-```
+👨‍💻 Author
 
-### 🔹 Backend Setup (Planned)
+Piyush Mishra
 
-```id="k2x8fd"
-cd backend
-npm install
-npm run start
-```
+----
 
----
+⭐ Note
 
-## 🔄 System Workflow
-
-1. User registers and logs in
-2. Books an appointment with a doctor
-3. Doctor confirms and provides consultation
-4. Hospital manages further treatment if required
-5. Medical store fulfills prescriptions
-6. Insurance company processes claims
-
----
-
-## 🔒 Security Features
-
-* JWT Authentication
-* Password hashing (bcrypt)
-* API validation & sanitization
-* Role-based access control (RBAC)
-
----
-
-## 📈 Future Enhancements
-
-* 🤖 AI Symptom Checker (ML-based)
-* 🧠 Smart doctor recommendation engine
-* 📡 WebSocket-based live consultation
-* 📊 Advanced analytics dashboard
-* 🌍 Multi-language support
-* 📲 Mobile app (React Native)
-
----
-
-## 🎯 Learning Outcomes
-
-* Full Stack SaaS Development
-* Scalable System Design
-* Microservices & Event-driven Architecture
-* Real-world Healthcare Application Development
-
----
-
-## 👨‍💻 Author
-
-**Piyush Mishra**
-
----
-
-## ⭐ Contribution
-
-Contributions are welcome! Feel free to fork this repository and submit pull requests.
-
----
+This project is under active development and will be continuously updated.
