@@ -14,8 +14,7 @@ The project focuses on building a **scalable, real-world healthcare system** usi
 
 > 📌 Planned system architecture:
 
-<img src="./system-architecture.png" width="900"/>
-
+<img src="https://github.com/user-attachments/assets/e835ca25-0e57-40c6-ae39-9bbf7405096e" width="800"/>
 ---
 
 ## 🎯 Project Objective
