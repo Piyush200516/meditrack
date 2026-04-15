@@ -1,1 +1,0 @@
-- [x] Edit Home.jsx: Update import to use 'react-icons/fa' and FaTachometerAlt
